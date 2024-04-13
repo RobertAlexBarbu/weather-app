@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "8w//27djfN4eJJcre+w6IXZViuyH6PIlWihBd/F9TdbE7j4QvCH9+2r278MDJhk7OOtm675Lnn/PoPEf4tli8g==",
+  "success": true,
+  "projectFilePath": "/Users/robertbarbu/Coding/repos/weather-app/backend/WeatherApp/WeatherAppAPI/WeatherAppAPI.csproj",
+  "expectedPackageFiles": [
+    "/Users/robertbarbu/.nuget/packages/microsoft.aspnetcore.openapi/8.0.3/microsoft.aspnetcore.openapi.8.0.3.nupkg.sha512",
+    "/Users/robertbarbu/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/Users/robertbarbu/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/Users/robertbarbu/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "/Users/robertbarbu/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "/Users/robertbarbu/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "/Users/robertbarbu/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
