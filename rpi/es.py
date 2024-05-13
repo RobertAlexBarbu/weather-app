@@ -36,7 +36,7 @@ while True:
   else:
     GPIO.output(redLedPin, GPIO.LOW)
   
-
+# hey
   try:
     # Print the values to the serial port
     temperature_c = dhtDevice.temperature
