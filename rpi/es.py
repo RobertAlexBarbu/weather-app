@@ -49,8 +49,21 @@ while True:
     )
     if(humidity > 30):
       GPIO.output(buzzerPin, GPIO.HIGH)
-      time.sleep(1)
+      time.sleep(0.2)
       GPIO.output(buzzerPin, GPIO.LOW)
+      time.sleep(0.2)
+      GPIO.output(buzzerPin, GPIO.HIGH)
+      time.sleep(0.2)
+      GPIO.output(buzzerPin, GPIO.LOW)
+      time.sleep(0.2)
+      GPIO.output(buzzerPin, GPIO.HIGH)
+      time.sleep(0.2)
+      GPIO.output(buzzerPin, GPIO.LOW)
+      time.sleep(0.2)
+      GPIO.output(buzzerPin, GPIO.HIGH)
+      time.sleep(0.2)
+      GPIO.output(buzzerPin, GPIO.LOW)
+      time.sleep(0.2)
     data = {
       "Temperature": temperature_c,
       "Humidity": humidity,
