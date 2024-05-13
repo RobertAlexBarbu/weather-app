@@ -11,12 +11,13 @@ import RPi.GPIO as GPIO
 #replace D23 with the GPIO pin you used in your circuit
 dhtDevice = adafruit_dht.DHT11(board.D23)
 tm = tm1637.TM1637(clk=5, dio=4) # GPIO 5 for clock and GPIO 4 for dio
+
 GPIO.setmode(GPIO.BOARD)
 resistorPin = 7
 redLedPin = 17
 
 while True:
-  GPIO.setup(redLedPin,GPIO.OUT)
+  # GPIO.setup(redLedPin,GPIO.OUT)
   GPIO.setup(resistorPin, GPIO.OUT)
   GPIO.output(resistorPin, GPIO.LOW)
   time.sleep(0.1)
@@ -27,10 +28,10 @@ while True:
     diff = time.time() - currentTime
   print(diff * 10000000)
   time.sleep(1)
-  if (diff * 10000000> 700):
-    GPIO.output(redLedPin, GPIO.HIGH)
-  else:
-    GPIO.output(redLedPin, GPIO.LOW)
+  # if (diff * 10000000> 700):
+  #   GPIO.output(redLedPin, GPIO.HIGH)
+  # else:
+  #   GPIO.output(redLedPin, GPIO.LOW)
 
   try:
     # Print the values to the serial port
