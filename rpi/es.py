@@ -20,11 +20,7 @@ buzzerPin = 24
 while True:
   GPIO.setup(redLedPin,GPIO.OUT)
   GPIO.setup(buzzerPin, GPIO.OUT)
-  
 
-  GPIO.output(buzzerPin, GPIO.HIGH)
-  time.sleep(0.5)
-  GPIO.output(buzzerPin, GPIO.LOW)
   GPIO.setup(resistorPin, GPIO.OUT)
   GPIO.output(resistorPin, GPIO.LOW)
   time.sleep(0.1)
@@ -39,6 +35,7 @@ while True:
     GPIO.output(redLedPin, GPIO.HIGH)
   else:
     GPIO.output(redLedPin, GPIO.LOW)
+  
 
   try:
     # Print the values to the serial port
@@ -50,6 +47,10 @@ while True:
         temperature_f, temperature_c, humidity
       )
     )
+    if(humidity > 30):
+      GPIO.output(buzzerPin, GPIO.HIGH)
+      time.sleep(1)
+      GPIO.output(buzzerPin, GPIO.LOW)
     data = {
       "Temperature": temperature_c,
       "Humidity": humidity,
