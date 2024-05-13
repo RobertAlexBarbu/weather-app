@@ -1,10 +1,8 @@
 import time
 import board
 import adafruit_dht
-import pyrebase
 import random
 import datetime
-import tm1637
 import RPi.GPIO as GPIO
 
 

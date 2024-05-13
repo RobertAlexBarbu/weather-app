@@ -1,10 +1,10 @@
 import time
-import board
-import adafruit_dht
+# import board
+# import adafruit_dht
 import pyrebase
 import random
 import datetime
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 
 config = {
   "apiKey": "AIzaSyBme5hGShcyPNOfRCl0HgSNJU5MmOfbg8Q",
@@ -14,49 +14,42 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-
 db = firebase.database()
-
-#replace D23 with the GPIO pin you used in your circuit
-dhtDevice = adafruit_dht.DHT11(board.D23)
-resistorPin = 7
 
 while True:
 
   # Photoresistor/Luminosity Part
-  GPIO.setup(resistorPin, GPIO.OUT)
-  GPIO.output(resistorPin, GPIO.LOW)
   time.sleep(0.1)
-  GPIO.setup(resistorPin, GPIO.IN)
-  currentTime = time.time()
-  diff = 0
-  while(GPIO.input(resistorPin) == GPIO.LOW):
-    diff = time.time() - currentTime
-  print(diff * 10000000)
+  luminosity = random.randint(1000, 12000)
+  luminosityMessage = ""
   time.sleep(1)
-  if (diff * 10000000> 6000):
+  print(luminosity)
+  if (luminosity > 6000):
     # too cloudy
-    print("It's cloudy")
+    luminosityMessage = "cloudy"
   else:
     # sunny
-    print("It's sunny")
+    luminosityMessage = "sunny"
 
   # Temperature/Humidity Part
   try:
     # Print the values to the serial port
-    temperature_c = dhtDevice.temperature
+    temperature_c = random.randint(10,30)
     temperature_f = temperature_c * (9 / 5) + 32
-    humidity = dhtDevice.humidity
-    print(
-      "Temp: {:.1f} F / {:.1f} C     Humidity: {}% ".format(
-        temperature_f, temperature_c, humidity
-      )
-    )
+    humidity = random.randint(0, 100)
+    # print(
+    #   "Temp: {:.1f} F / {:.1f} C     Humidity: {}% ".format(
+    #     temperature_f, temperature_c, humidity
+    #   )
+    # )
     data = {
-      "Temperature": temperature_c,
-      "Humidity": humidity,
-      "Datetime": datetime.datetime.now()
+      "temperature": temperature_c,
+      "humidity": humidity,
+      "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+      "luminosity": luminosityMessage,
+      "rain": True
     }
+    print(data);
     db.child("Status").push(data)
     db.update(data)
     print("Sent to Firebase")
@@ -67,7 +60,6 @@ while True:
     time.sleep(2.0)
     continue
   except Exception as error:
-    dhtDevice.exit()
     raise error
   
   time.sleep(2.0)
