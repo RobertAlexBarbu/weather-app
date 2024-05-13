@@ -4,23 +4,34 @@ import adafruit_dht
 import pyrebase
 import random
 import datetime
+import tm1637
+import RPi.GPIO as GPIO
 
-config = {
-  "apiKey": "AIzaSyBme5hGShcyPNOfRCl0HgSNJU5MmOfbg8Q",
-  "authDomain": "weather-app-b3426.firebaseapp.com",
-  "databaseURL": "https://weather-app-b3426-default-rtdb.europe-west1.firebasedatabase.app/",
-  "storageBucket": ""
-}
-
-firebase = pyrebase.initialize_app(config)
-
-db = firebase.database()
 
 #replace D23 with the GPIO pin you used in your circuit
 dhtDevice = adafruit_dht.DHT11(board.D23)
-
+tm = tm1637.TM1637(clk=5, dio=4) # GPIO 5 for clock and GPIO 4 for dio
+GPIO.setmode(GPIO.BOARD)
+resistorPin = 7
+redLedPin = 17
 
 while True:
+  GPIO.setup(redLedPin,GPIO.OUT)
+  GPIO.setup(resistorPin, GPIO.OUT)
+  GPIO.output(resistorPin, GPIO.LOW)
+  time.sleep(0.1)
+  GPIO.setup(resistorPin, GPIO.IN)
+  currentTime = time.time()
+  diff = 0
+  while(GPIO.input(resistorPin) == GPIO.LOW):
+    diff = time.time() - currentTime
+  print(diff * 10000000)
+  time.sleep(1)
+  if (diff * 10000000> 700):
+    GPIO.output(redLedPin, GPIO.HIGH)
+  else:
+    GPIO.output(redLedPin, GPIO.LOW)
+
   try:
     # Print the values to the serial port
     temperature_c = dhtDevice.temperature
@@ -36,9 +47,7 @@ while True:
       "Humidity": humidity,
       "Datetime": datetime.datetime.now()
     }
-    db.child("Status").push(data)
-    db.update(data)
-    print("Sent to Firebase")
+    tm.temperature(temperature_c)
     
   except RuntimeError as error:
     # Errors happen fairly often, DHT's are hard to read, just keep going
