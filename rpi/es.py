@@ -14,13 +14,17 @@ dhtDevice = adafruit_dht.DHT11(board.D23)
 
 # GPIO.setmode(GPIO.BOARD)
 resistorPin = 7
-redLedPin = 17
+redLedPin = 18
 buzzerPin = 24
 
 while True:
   GPIO.setup(redLedPin,GPIO.OUT)
   GPIO.setup(buzzerPin, GPIO.OUT)
+  
+
   GPIO.output(buzzerPin, GPIO.HIGH)
+  time.sleep(0.5)
+  GPIO.output(buzzerPin, GPIO.LOW)
   GPIO.setup(resistorPin, GPIO.OUT)
   GPIO.output(resistorPin, GPIO.LOW)
   time.sleep(0.1)
