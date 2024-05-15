@@ -5,6 +5,7 @@ import pyrebase
 import random
 import datetime
 import RPi.GPIO as GPIO
+from gpiozero import DigitalInputDevice
 
 config = {
   "apiKey": "AIzaSyBme5hGShcyPNOfRCl0HgSNJU5MmOfbg8Q",
@@ -14,12 +15,14 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-
 db = firebase.database()
 
 #replace D23 with the GPIO pin you used in your circuit
 dhtDevice = adafruit_dht.DHT11(board.D23)
 resistorPin = 7
+rainPin = 18
+rainDevice = DigitalInputDevice(rainPin)
+rain = False
 
 while True:
 
@@ -33,13 +36,18 @@ while True:
   while(GPIO.input(resistorPin) == GPIO.LOW):
     diff = time.time() - currentTime
   print(diff * 10000000)
+  luminosityMessage = ""
   time.sleep(1)
-  if (diff * 10000000> 6000):
-    # too cloudy
-    print("It's cloudy")
+  if (diff * 10000000 > 6000):
+    luminosityMessage = "cloudy"
   else:
-    # sunny
-    print("It's sunny")
+    luminosityMessage = "sunny"
+
+  # Rain Detection Part
+  if(rainDevice.is_active):
+    rain = True
+  else:
+    rain = False
 
   # Temperature/Humidity Part
   try:
@@ -47,16 +55,14 @@ while True:
     temperature_c = dhtDevice.temperature
     temperature_f = temperature_c * (9 / 5) + 32
     humidity = dhtDevice.humidity
-    print(
-      "Temp: {:.1f} F / {:.1f} C     Humidity: {}% ".format(
-        temperature_f, temperature_c, humidity
-      )
-    )
     data = {
-      "Temperature": temperature_c,
-      "Humidity": humidity,
-      "Datetime": datetime.datetime.now()
+      "temperature": temperature_c,
+      "humidity": humidity,
+      "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+      "luminosity": luminosityMessage,
+      "rain": rain
     }
+    print(data)
     db.child("Status").push(data)
     db.update(data)
     print("Sent to Firebase")

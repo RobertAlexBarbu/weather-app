@@ -49,7 +49,7 @@ while True:
       "luminosity": luminosityMessage,
       "rain": True
     }
-    print(data);
+    print(data)
     db.child("Status").push(data)
     db.update(data)
     print("Sent to Firebase")

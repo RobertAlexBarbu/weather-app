@@ -10,7 +10,7 @@ import RPi.GPIO as GPIO
 dhtDevice = adafruit_dht.DHT11(board.D23)
 # tm = tm1637.TM1637(clk=5, dio=4) # GPIO 5 for clock and GPIO 4 for dio
 
-# GPIO.setmode(GPIO.BOARD)
+# GPIO.setmode(GPIO.BOARD) or GPIO.setmode(BCE)
 resistorPin = 7
 redLedPin = 18
 buzzerPin = 24
