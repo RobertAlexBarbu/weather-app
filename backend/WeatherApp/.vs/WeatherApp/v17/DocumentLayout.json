@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherappapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|solutionrelative:weatherappapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|solutionrelative:weatherappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherappapi\\weatherappapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|solutionrelative:weatherappapi\\weatherappapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherappapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|solutionrelative:weatherappapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "WeatherAppAPI\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "WeatherAppAPI\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-01T07:19:53.441Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WeatherAppAPI.http",
+              "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\WeatherAppAPI.http",
+              "RelativeDocumentMoniker": "WeatherAppAPI\\WeatherAppAPI.http",
+              "ToolTip": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\WeatherAppAPI.http",
+              "RelativeToolTip": "WeatherAppAPI\\WeatherAppAPI.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-05-01T07:19:40.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "WeatherAppAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\appsettings.json",
+              "RelativeToolTip": "WeatherAppAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-01T07:19:34.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\Program.cs",
+              "RelativeDocumentMoniker": "WeatherAppAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\Program.cs",
+              "RelativeToolTip": "WeatherAppAPI\\Program.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T07:15:31.971Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
