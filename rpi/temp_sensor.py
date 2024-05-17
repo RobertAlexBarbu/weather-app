@@ -38,7 +38,7 @@ while True:
   print(diff * 10000000)
   luminosityMessage = ""
   time.sleep(1)
-  if (diff * 10000000 > 6000):
+  if (diff * 10000000 > 2000):
     luminosityMessage = "cloudy"
   else:
     luminosityMessage = "sunny"
