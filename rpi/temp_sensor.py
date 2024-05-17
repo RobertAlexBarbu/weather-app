@@ -5,8 +5,8 @@ import pyrebase
 import random
 import datetime
 import RPi.GPIO as GPIO
-from gpiozero import DigitalInputDevice
-from machine import Pin
+from gpiozero import InputDevice
+
 
 config = {
   "apiKey": "AIzaSyBme5hGShcyPNOfRCl0HgSNJU5MmOfbg8Q",
@@ -23,9 +23,9 @@ conv = 100 / (65535)
 dhtDevice = adafruit_dht.DHT11(board.D23)
 resistorPin = 7
 rainPin = 18
-rainDevice = DigitalInputDevice(rainPin)
+rainDevice = InputDevice(rainPin)
 rain = False
-adc = machine.ADC(rainPin) 
+
 
 while True:
 
@@ -47,10 +47,10 @@ while True:
     luminosityMessage = "sunny"
 
   print(rainDevice)
-  rainy = 100 - (adc.read_u16() * conv)
-  print(rainy)
+ 
+
   # Rain Detection Part
-  if(rainDevice.is_active):
+  if(not rainDevice.is_active):
     print("there is rain")
     rain = True
   else:
