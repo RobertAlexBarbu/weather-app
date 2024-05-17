@@ -43,10 +43,13 @@ while True:
   else:
     luminosityMessage = "sunny"
 
+  print(rainDevice)
   # Rain Detection Part
   if(rainDevice.is_active):
+    print("there is rain")
     rain = True
   else:
+    print("there is no rin")
     rain = False
 
   # Temperature/Humidity Part
