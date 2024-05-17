@@ -6,6 +6,7 @@ import random
 import datetime
 import RPi.GPIO as GPIO
 from gpiozero import DigitalInputDevice
+from machine import Pin
 
 config = {
   "apiKey": "AIzaSyBme5hGShcyPNOfRCl0HgSNJU5MmOfbg8Q",
@@ -16,6 +17,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
+conv = 100 / (65535) 
 
 #replace D23 with the GPIO pin you used in your circuit
 dhtDevice = adafruit_dht.DHT11(board.D23)
@@ -23,6 +25,7 @@ resistorPin = 7
 rainPin = 18
 rainDevice = DigitalInputDevice(rainPin)
 rain = False
+adc = machine.ADC(rainPin) 
 
 while True:
 
@@ -44,6 +47,8 @@ while True:
     luminosityMessage = "sunny"
 
   print(rainDevice)
+  rainy = 100 - (adc.read_u16() * conv)
+  print(rainy)
   # Rain Detection Part
   if(rainDevice.is_active):
     print("there is rain")
@@ -63,7 +68,7 @@ while True:
       "humidity": humidity,
       "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
       "luminosity": luminosityMessage,
-      "rain": rain
+      "rain": rainy
     }
     print(data)
     db.child("Status").push(data)
