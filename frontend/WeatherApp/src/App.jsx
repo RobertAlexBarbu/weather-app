@@ -4,10 +4,12 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import Particle from './components/Particle';
 import BackgroundVideo from './components/BackgroundVideo';
+import { getAllAnimals, createAnimal, deleteAnimal, editAnimal } from './animals/api';
 
 function App() {
 
   const [latestWeather, setLatestWeather] = useState(null);
+  const [animals, setAnimals] = useState([]);
 
   // Firebase configuration
   const firebaseConfig = {
@@ -41,6 +43,20 @@ function App() {
       off(weatherRef);
     };
   }, [db]);
+
+
+  useEffect(() => {
+    const fetchAnimals = async () => {
+      try {
+        const data = await getAllAnimals();
+        setAnimals(data);
+      } catch (error) {
+        console.error('Failed to fetch animals', error);
+      }
+    };
+
+    fetchAnimals();
+  }, []);
   
 
   return (
@@ -70,6 +86,55 @@ function App() {
           )}
         </tbody>
       </table>
+
+      <h1>Animals</h1>
+      
+      <div class="card">
+        <div class="card-image"></div>
+
+        <div class="card-name">Animal</div>
+
+        <div class="card-stats">
+          <div class="stat temperature">
+          <div class="value">minTemperature - maxTemperature (°C)</div>
+          </div>
+          <div class="stat humidity">
+          <div class="value">minHumidity - maxHumidity (%)</div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <table className="animal-cards">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Min Temperature (°C)</th>
+            <th>Max Temperature (°C)</th>
+            <th>Min Humidity (%)</th>
+            <th>Max Humidity (%)</th>
+            <th>Rain</th>
+            <th>Sunny</th>
+            <th>Cloudy</th>
+          </tr>
+        </thead>
+        <tbody>
+          {animals.map((animal) => (
+            <tr key={animal.id}>
+              <td>{animal.name}</td>
+              <td>{animal.minTemperature}</td>
+              <td>{animal.maxTemperature}</td>
+              <td>{animal.minHumidity}</td>
+              <td>{animal.maxHumidity}</td>
+              <td>{animal.rain ? 'Yes' : 'No'}</td>
+              <td>{animal.sunny ? 'Yes' : 'No'}</td>
+              <td>{animal.cloudy ? 'Yes' : 'No'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
     </>
   );
 }
