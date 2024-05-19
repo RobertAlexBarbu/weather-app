@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue, off } from 'firebase/database';
 import Particle from './components/Particle';
 import BackgroundVideo from './components/BackgroundVideo';
-import { getAllAnimals, createAnimal, deleteAnimal, editAnimal } from './animals/api';
+import { getAllAnimals, createAnimal } from './animals/api';
+import AnimalCards from './animals/Animals';
+import AnimalForm from './animals/AnimalForm';
 
 function App() {
-
   const [latestWeather, setLatestWeather] = useState(null);
   const [animals, setAnimals] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   // Firebase configuration
   const firebaseConfig = {
@@ -37,13 +40,12 @@ function App() {
         setLatestWeather(latestData);
       }
     });
-  
+
     return () => {
       // Clean up Firebase listener
       off(weatherRef);
     };
   }, [db]);
-
 
   useEffect(() => {
     const fetchAnimals = async () => {
@@ -57,7 +59,24 @@ function App() {
 
     fetchAnimals();
   }, []);
-  
+
+  const handleCreateAnimal = async (animalData) => {
+    try {
+      const newAnimal = await createAnimal(animalData);
+      setAnimals([...animals, newAnimal]);
+    } catch (error) {
+      console.error('Failed to create animal', error);
+    }
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+    setShowForm(false); // Close the form when toggling edit mode
+  };
+
+  const handleAddAnimalClick = () => {
+    setShowForm(true);
+  };
 
   return (
     <>
@@ -86,55 +105,17 @@ function App() {
           )}
         </tbody>
       </table>
-
       <h1>Animals</h1>
-      
-      <div class="card">
-        <div class="card-image"></div>
-
-        <div class="card-name">Animal</div>
-
-        <div class="card-stats">
-          <div class="stat temperature">
-          <div class="value">minTemperature - maxTemperature (°C)</div>
-          </div>
-          <div class="stat humidity">
-          <div class="value">minHumidity - maxHumidity (%)</div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <table className="animal-cards">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Min Temperature (°C)</th>
-            <th>Max Temperature (°C)</th>
-            <th>Min Humidity (%)</th>
-            <th>Max Humidity (%)</th>
-            <th>Rain</th>
-            <th>Sunny</th>
-            <th>Cloudy</th>
-          </tr>
-        </thead>
-        <tbody>
-          {animals.map((animal) => (
-            <tr key={animal.id}>
-              <td>{animal.name}</td>
-              <td>{animal.minTemperature}</td>
-              <td>{animal.maxTemperature}</td>
-              <td>{animal.minHumidity}</td>
-              <td>{animal.maxHumidity}</td>
-              <td>{animal.rain ? 'Yes' : 'No'}</td>
-              <td>{animal.sunny ? 'Yes' : 'No'}</td>
-              <td>{animal.cloudy ? 'Yes' : 'No'}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
+      <button
+        className={`edit-button ${isEditing ? 'cancel-button' : ''}`}
+        onClick={handleEditClick}
+      >
+        {isEditing ? 'Cancel' : 'Edit'}
+      </button>
+      {showForm && (
+        <AnimalForm onCreateAnimal={handleCreateAnimal} onClose={() => setShowForm(false)} />
+      )}
+      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} />
     </>
   );
 }

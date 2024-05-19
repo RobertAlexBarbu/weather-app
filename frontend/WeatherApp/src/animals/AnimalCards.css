@@ -1,0 +1,108 @@
+/* AnimalCards.css */
+.card {
+  width: 200px;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* Make the card the positioning context */
+  padding: 0.5rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden; /* Ensure elements don't overflow outside the card */
+}
+
+.card-name,
+.card-stats {
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition effect */
+  color: #333; /* A neutral dark gray color suitable for both white and black backgrounds */
+}
+
+.card:hover .card-name {
+  opacity: 1;
+  transform: translateY(0); /* Slide down and fade in */
+}
+
+.card:hover .card-stats {
+  opacity: 1;
+  transform: translateX(0); /* Slide in and fade in */
+}
+
+.card-name {
+  position: absolute; /* Position the name absolutely within the card */
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333; /* A neutral dark gray color suitable for both white and black backgrounds */
+  z-index: 1;
+  transform: translateY(-20px); /* Initial position for slide effect */
+}
+
+.card-stats {
+  position: absolute; /* Position the stats absolutely within the card */
+  bottom: 0.5rem;
+  right: 0.5rem;
+  text-align: right;
+  transform: translateX(20px); /* Initial position for slide effect */
+}
+
+.stat {
+  margin: 0.2rem 0;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.add-card {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px dashed #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-symbol {
+  font-size: 3rem;
+  color: #333;
+  transition: transform 0.3s;
+}
+
+.add-card:hover .add-symbol {
+  transform: scale(1.2);
+}
+
+.edit-button {
+  position: fixed; /* Fixed position to keep the button in view */
+  top: 20px; /* Adjust this value to your desired distance from the top */
+  right: 20px; /* Adjust this value to your desired distance from the right */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin: 1rem 0;
+}
+
+.edit-button.cancel-button {
+  background-color: #f44336;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.edit-button.cancel-button:hover {
+  background-color: #e53935;
+}

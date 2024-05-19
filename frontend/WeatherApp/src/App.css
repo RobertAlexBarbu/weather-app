@@ -57,34 +57,3 @@ video {
   background-color: #6e6c6c;
 }
 
-
-.card {
-  width: 200px;
-  height: 300px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-}
-
-  .card .name {
-    font-weight: bold;
-    margin-left: 10px;
-  }
-
-  @media (max-width: 768px) {
-    .card {
-      width: 100%;
-      height: auto;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 1rem;
-    }
-
-    .card::before {
-      display: none;
-    }
-  }

@@ -44,7 +44,7 @@
               "RelativeDocumentMoniker": "WeatherAppAPI\\Program.cs",
               "ToolTip": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\Program.cs",
               "RelativeToolTip": "WeatherAppAPI\\Program.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAABIAAAARAAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAqwBIAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-16T12:21:27.616Z",
               "EditorCaption": ""
@@ -59,8 +59,7 @@
               "RelativeToolTip": "WeatherApp.Repository\\Data\\WeatherAppDbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T10:45:57.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T10:45:57.669Z"
             },
             {
               "$type": "Document",
@@ -72,8 +71,7 @@
               "RelativeToolTip": "WeatherApp.Repository\\Migrations\\WeatherAppDbContextModelSnapshot.cs",
               "ViewState": "AQIAABkAAAAAAAAAAAAQwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T10:45:50.408Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T10:45:50.408Z"
             },
             {
               "$type": "Document",
@@ -83,10 +81,9 @@
               "RelativeDocumentMoniker": "WeatherApp.Domain\\Entities\\Animal.cs",
               "ToolTip": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherApp.Domain\\Entities\\Animal.cs",
               "RelativeToolTip": "WeatherApp.Domain\\Entities\\Animal.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAzwAcAAAArAAAA",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwAcAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T17:38:48.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-15T17:38:48.191Z"
             },
             {
               "$type": "Document",
@@ -98,8 +95,7 @@
               "RelativeToolTip": "WeatherAppAPI\\Controllers\\AnimalController.cs",
               "ViewState": "AQIAAFsAAAAAAAAAAAAkwBcAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T17:38:28.426Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-15T17:38:28.426Z"
             }
           ]
         }
