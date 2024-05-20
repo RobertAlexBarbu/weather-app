@@ -24,6 +24,9 @@ app.UseCors(options =>
            .AllowAnyHeader();
 });
 
+
+app.UseStaticFiles();
+app.UseDefaultFiles();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -31,12 +34,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapFallbackToFile("/index.html");
 
 app.Run();
