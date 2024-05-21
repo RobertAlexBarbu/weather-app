@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|solutionrelative:weatherappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{8E4ABEA8-1F19-456D-AB48-D6BA75B053F0}|WeatherApp.Repository\\WeatherApp.Repository.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherapp.repository\\data\\weatherappdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E4ABEA8-1F19-456D-AB48-D6BA75B053F0}|WeatherApp.Repository\\WeatherApp.Repository.csproj|solutionrelative:weatherapp.repository\\data\\weatherappdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherappapi\\controllers\\animalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{322FC78F-6DEA-48EE-9FCE-49CB67AB9F78}|WeatherAppAPI\\WeatherAppAPI.csproj|solutionrelative:weatherappapi\\controllers\\animalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8E4ABEA8-1F19-456D-AB48-D6BA75B053F0}|WeatherApp.Repository\\WeatherApp.Repository.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherapp.repository\\migrations\\weatherappdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8E4ABEA8-1F19-456D-AB48-D6BA75B053F0}|WeatherApp.Repository\\WeatherApp.Repository.csproj|solutionrelative:weatherapp.repository\\migrations\\weatherappdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8E4ABEA8-1F19-456D-AB48-D6BA75B053F0}|WeatherApp.Repository\\WeatherApp.Repository.csproj|c:\\users\\raulb\\onedrive\\desktop\\weather-apppppp\\backend\\weatherapp\\weatherapp.repository\\data\\weatherappdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8E4ABEA8-1F19-456D-AB48-D6BA75B053F0}|WeatherApp.Repository\\WeatherApp.Repository.csproj|solutionrelative:weatherapp.repository\\data\\weatherappdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -44,14 +44,14 @@
               "RelativeDocumentMoniker": "WeatherAppAPI\\Program.cs",
               "ToolTip": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\Program.cs",
               "RelativeToolTip": "WeatherAppAPI\\Program.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAqwBIAAAARAAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAowBIAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-16T12:21:27.616Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "WeatherAppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherApp.Repository\\Data\\WeatherAppDbContext.cs",
               "RelativeDocumentMoniker": "WeatherApp.Repository\\Data\\WeatherAppDbContext.cs",
@@ -63,7 +63,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "WeatherAppDbContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherApp.Repository\\Migrations\\WeatherAppDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "WeatherApp.Repository\\Migrations\\WeatherAppDbContextModelSnapshot.cs",
@@ -75,7 +75,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Animal.cs",
               "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherApp.Domain\\Entities\\Animal.cs",
               "RelativeDocumentMoniker": "WeatherApp.Domain\\Entities\\Animal.cs",
@@ -87,7 +87,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AnimalController.cs",
               "DocumentMoniker": "C:\\Users\\raulb\\OneDrive\\Desktop\\weather-apppppp\\backend\\WeatherApp\\WeatherAppAPI\\Controllers\\AnimalController.cs",
               "RelativeDocumentMoniker": "WeatherAppAPI\\Controllers\\AnimalController.cs",

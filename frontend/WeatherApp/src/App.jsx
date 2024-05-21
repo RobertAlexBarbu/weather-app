@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, off } from 'firebase/database';
 import Particle from './components/Particle';
 import BackgroundVideo from './components/BackgroundVideo';
-import { getAllAnimals, createAnimal } from './animals/api';
+import { getAllAnimals, createAnimal, deleteAnimal } from './animals/api';
 import AnimalCards from './animals/Animals';
 import AnimalForm from './animals/AnimalForm';
 
@@ -13,6 +13,7 @@ function App() {
   const [animals, setAnimals] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [animalToDelete, setAnimalToDelete] = useState(null);
 
   // Firebase configuration
   const firebaseConfig = {
@@ -78,6 +79,24 @@ function App() {
     setShowForm(true);
   };
 
+  const handleDeleteClick = (animalId) => {
+    setAnimalToDelete(animalId);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteAnimal(animalToDelete);
+      setAnimals(animals.filter(animal => animal.id !== animalToDelete));
+      setAnimalToDelete(null);
+    } catch (error) {
+      console.error('Failed to delete animal', error);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setAnimalToDelete(null);
+  };
+
   return (
     <>
       <Particle />
@@ -115,7 +134,21 @@ function App() {
       {showForm && (
         <AnimalForm onCreateAnimal={handleCreateAnimal} onClose={() => setShowForm(false)} />
       )}
-      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} />
+      <AnimalCards
+        animals={animals}
+        isEditing={isEditing}
+        onAddAnimalClick={handleAddAnimalClick}
+        onDeleteClick={handleDeleteClick}
+      />
+      {animalToDelete && (
+        <div className="delete-confirmation-overlay">
+          <div className="delete-confirmation-modal">
+            <h2>Are you sure you want to delete this animal card?</h2>
+            <button onClick={handleConfirmDelete}>Delete</button>
+            <button onClick={handleCancelDelete}>Cancel</button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
