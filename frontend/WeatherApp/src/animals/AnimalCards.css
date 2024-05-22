@@ -5,49 +5,49 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative; /* Make the card the positioning context */
+  position: relative;
   padding: 0.5rem;
   margin: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow: hidden; /* Ensure elements don't overflow outside the card */
+  overflow: hidden;
 }
 
 .card-name,
 .card-stats {
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition effect */
-  color: #333; /* A neutral dark gray color suitable for both white and black backgrounds */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: #333;
 }
 
 .card:hover .card-name {
   opacity: 1;
-  transform: translateY(0); /* Slide down and fade in */
+  transform: translateY(0);
 }
 
 .card:hover .card-stats {
   opacity: 1;
-  transform: translateX(0); /* Slide in and fade in */
+  transform: translateX(0);
 }
 
 .card-name {
-  position: absolute; /* Position the name absolutely within the card */
+  position: absolute;
   top: 0.5rem;
   left: 0.5rem;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #333; /* A neutral dark gray color suitable for both white and black backgrounds */
+  color: #333;
   z-index: 1;
-  transform: translateY(-20px); /* Initial position for slide effect */
+  transform: translateY(-20px);
 }
 
 .card-stats {
-  position: absolute; /* Position the stats absolutely within the card */
+  position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
   text-align: right;
-  transform: translateX(20px); /* Initial position for slide effect */
+  transform: translateX(20px);
 }
 
 .stat {
@@ -57,6 +57,8 @@
 .cards-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around; /* Updated property */
+  align-items: flex-start; /* Updated property */
   gap: 1rem;
 }
 
@@ -81,9 +83,9 @@
 }
 
 .edit-button {
-  position: fixed; /* Fixed position to keep the button in view */
-  top: 20px; /* Adjust this value to your desired distance from the top */
-  right: 20px; /* Adjust this value to your desired distance from the right */
+  position: fixed;
+  top: 20px;
+  right: 20px;
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -109,17 +111,16 @@
 
 .delete-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: red;
-  color: white;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
   border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
   font-size: 1.5rem;
-  line-height: 1;
-  text-align: center;
-  padding: 0;
+  color: red;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.delete-button:hover {
+  color: darkred;
 }

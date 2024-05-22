@@ -6,12 +6,12 @@
 }
 
 .bgContainer {
-  position: fixed; /* Fixed position to cover the entire viewport */
+  position: fixed;
   top: 0;
   left: 0;
   width:100%;
   height:100%;
-  z-index: -1; /* Set z-index to -1 to position it behind other content */
+  z-index: -1;
 }
 
 video {

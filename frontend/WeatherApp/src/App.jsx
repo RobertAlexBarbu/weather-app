@@ -7,15 +7,17 @@ import BackgroundVideo from './components/BackgroundVideo';
 import { getAllAnimals, createAnimal, deleteAnimal } from './animals/api';
 import AnimalCards from './animals/Animals';
 import AnimalForm from './animals/AnimalForm';
+import ConfirmationModal from './animals/ConfirmationModal';
+
 
 function App() {
   const [latestWeather, setLatestWeather] = useState(null);
   const [animals, setAnimals] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [animalToDelete, setAnimalToDelete] = useState(null);
 
-  // Firebase configuration
   const firebaseConfig = {
     apiKey: 'AIzaSyBme5hGShcyPNOfRCl0HgSNJU5MmOfbg8Q',
     authDomain: 'weather-app-b3426.firebaseapp.com',
@@ -26,7 +28,6 @@ function App() {
     appId: '1:1094701237609:web:64934d37312598df2b29f8',
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
@@ -34,16 +35,15 @@ function App() {
     const weatherRef = ref(db, 'Status');
     onValue(weatherRef, (snapshot) => {
       const data = snapshot.val();
-      console.log('Fetched data:', data); // Check if data is fetched
+      console.log('Fetched data:', data);
       if (data) {
         const latestData = Object.values(data).pop();
-        console.log('Latest data:', latestData); // Check if latest data is extracted
+        console.log('Latest data:', latestData);
         setLatestWeather(latestData);
       }
     });
 
     return () => {
-      // Clean up Firebase listener
       off(weatherRef);
     };
   }, [db]);
@@ -72,30 +72,31 @@ function App() {
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
-    setShowForm(false); // Close the form when toggling edit mode
+    setShowForm(false);
   };
 
   const handleAddAnimalClick = () => {
     setShowForm(true);
   };
 
-  const handleDeleteClick = (animalId) => {
-    setAnimalToDelete(animalId);
+  const handleDeleteClick = (animal) => {
+    setAnimalToDelete(animal);
+    setShowModal(true);
   };
 
   const handleConfirmDelete = async () => {
     try {
-      await deleteAnimal(animalToDelete);
-      setAnimals(animals.filter(animal => animal.id !== animalToDelete));
+      const animalToDeleteName = animalToDelete.name;
+      await deleteAnimal(animalToDelete.id);
+      setAnimals(animals.filter((a) => a.id !== animalToDelete.id));
+      setShowModal(false);
       setAnimalToDelete(null);
+      console.log('\"' + animalToDeleteName  + '\" ' + 'has been deleted');
     } catch (error) {
       console.error('Failed to delete animal', error);
     }
   };
 
-  const handleCancelDelete = () => {
-    setAnimalToDelete(null);
-  };
 
   return (
     <>
@@ -134,21 +135,12 @@ function App() {
       {showForm && (
         <AnimalForm onCreateAnimal={handleCreateAnimal} onClose={() => setShowForm(false)} />
       )}
-      <AnimalCards
-        animals={animals}
-        isEditing={isEditing}
-        onAddAnimalClick={handleAddAnimalClick}
-        onDeleteClick={handleDeleteClick}
+      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} onDeleteClick={handleDeleteClick} />
+      <ConfirmationModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleConfirmDelete}
       />
-      {animalToDelete && (
-        <div className="delete-confirmation-overlay">
-          <div className="delete-confirmation-modal">
-            <h2>Are you sure you want to delete this animal card?</h2>
-            <button onClick={handleConfirmDelete}>Delete</button>
-            <button onClick={handleCancelDelete}>Cancel</button>
-          </div>
-        </div>
-      )}
     </>
   );
 }
