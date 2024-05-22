@@ -31,12 +31,26 @@ export const deleteAnimal = async (id) => {
   }
 };
 
-export const editAnimal = async (id, animal) => {
+export const editAnimal = async (animal) => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/EditById?id=${id}`, animal);
+    const response = await axios.put(`${API_BASE_URL}/EditById?id=${animal.id}`, {
+      name: animal.name,
+      maxTemperature: animal.maxTemperature,
+      minTemperature: animal.minTemperature,
+      maxHumidity: animal.maxHumidity,
+      minHumidity: animal.minHumidity,
+      cloudy: animal.cloudy,
+      sunny: animal.sunny,
+      rain: animal.rain,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(animal.name + ' has been edited successfully');
     return response.data;
   } catch (error) {
-    console.error("Error editing animal", error);
+    console.error('Error editing animal', error);
     throw error;
   }
 };

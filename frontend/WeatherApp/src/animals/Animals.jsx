@@ -2,7 +2,7 @@
 import React from 'react';
 import './AnimalCards.css';
 
-const AnimalCards = ({ animals, isEditing, onAddAnimalClick, onDeleteClick }) => {
+const AnimalCards = ({ animals, isEditing, onAddAnimalClick, onDeleteClick, onEditButtonClick }) => {
   return (
     <div className="cards-container">
       {animals.map((animal) => (
@@ -25,8 +25,10 @@ const AnimalCards = ({ animals, isEditing, onAddAnimalClick, onDeleteClick }) =>
               <div className="value">Cloudy: {animal.cloudy ? 'Yes' : 'No'}</div>
             </div>
           </div>
-          {isEditing && (
+          {isEditing && (<>
             <button className="delete-button" onClick={() => onDeleteClick(animal)}>✖</button>
+            <button className="edit-animal-button" onClick={() => onEditButtonClick(animal)}>Edit</button>
+            </>
           )}
         </div>
       ))}
