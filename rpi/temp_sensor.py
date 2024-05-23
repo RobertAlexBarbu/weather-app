@@ -30,7 +30,14 @@ rain = False
 
 
 while True:
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(8, GPIO.IN)
+  state = GPIO.input(8)
 
+  if (state == 0):
+    print("Water detected!")
+  else:
+    print("Water not detected")
   # Photoresistor/Luminosity Part
   GPIO.setup(resistorPin, GPIO.OUT)
   GPIO.output(resistorPin, GPIO.LOW)
