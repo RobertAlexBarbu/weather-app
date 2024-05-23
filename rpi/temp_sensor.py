@@ -23,6 +23,8 @@ conv = 100 / (65535)
 dhtDevice = adafruit_dht.DHT11(board.D23)
 resistorPin = 7
 rainPin = 18
+POWER_PIN = 12  # GPIO pin that provides power to the rain sensor
+DO_PIN = 8 
 rainDevice = InputDevice(rainPin)
 rain = False
 
