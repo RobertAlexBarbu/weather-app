@@ -1,4 +1,3 @@
-// AnimalEditForm.jsx
 import React, { useState } from 'react';
 import './AnimalForm.css';
 

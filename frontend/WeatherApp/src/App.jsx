@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { initializeApp } from 'firebase/app';
@@ -6,7 +5,7 @@ import { getDatabase, ref, onValue, off } from 'firebase/database';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import Particle from './components/Particle';
 import BackgroundVideo from './components/BackgroundVideo';
-import { getAllAnimals, createAnimal, deleteAnimal, editAnimal } from './animals/api';
+import { getAllAnimals, createAnimal, deleteAnimal, editAnimal, sendNotification } from './animals/api';
 import AnimalCards from './animals/Animals';
 import AnimalForm from './animals/AnimalForm';
 import ConfirmationModal from './animals/ConfirmationModal';
@@ -144,6 +143,33 @@ function App() {
     setAnimalToEdit(null);
   };
 
+
+  const doesAnimalFitWeather = (animal) => {
+    if (!latestWeather) return true;
+
+    const fitsTemperature = latestWeather.temperature >= animal.minTemperature && latestWeather.temperature <= animal.maxTemperature;
+    const fitsHumidity = latestWeather.humidity >= animal.minHumidity && latestWeather.humidity <= animal.maxHumidity;
+    const fitsRain = animal.rain === latestWeather.rain;
+    const fitsLuminosity = latestWeather.luminosity ? animal.sunny : animal.cloudy;
+
+    return fitsTemperature && fitsHumidity && fitsRain && fitsLuminosity;
+  };
+
+  useEffect(() => {
+    animals.forEach(async (animal) => {
+      if (!doesAnimalFitWeather(animal)) {
+        try {
+          await sendNotification({ animalId: animal.id, message: `${animal.name} does not fit the current weather!` });
+          console.log(`Notification sent for ${animal.name}`);
+        } catch (error) {
+          console.error(`Failed to send notification for ${animal.name}`, error);
+        }
+      }
+    });
+  }, [animals, latestWeather]);
+
+
+
   return (
     <>
       <Particle />
@@ -189,7 +215,7 @@ function App() {
           uploadImage={uploadImage}
         />
       )}
-      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} onDeleteClick={handleDeleteClick} onEditButtonClick={handleEditButtonClick} downloadImageUrl={downloadImageUrl} />
+      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} onDeleteClick={handleDeleteClick} onEditButtonClick={handleEditButtonClick} downloadImageUrl={downloadImageUrl} latestWeather={latestWeather} />
       <ConfirmationModal
         show={showModal}
         onClose={() => setShowModal(false)}

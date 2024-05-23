@@ -1,8 +1,7 @@
-// AnimalCards.jsx
 import React, { useEffect, useState } from 'react';
 import './AnimalCards.css';
 
-const AnimalCards = ({ animals, isEditing, onAddAnimalClick, onDeleteClick, onEditButtonClick, downloadImageUrl }) => {
+const AnimalCards = ({ animals, isEditing, onAddAnimalClick, onDeleteClick, onEditButtonClick, downloadImageUrl, latestWeather }) => {
   const [animalImages, setAnimalImages] = useState({});
 
   useEffect(() => {
@@ -18,10 +17,22 @@ const AnimalCards = ({ animals, isEditing, onAddAnimalClick, onDeleteClick, onEd
     fetchImageUrls();
   }, [animals, downloadImageUrl]);
 
+  const doesAnimalFitWeather = (animal) => {
+    if (!latestWeather) return true;
+
+    const fitsTemperature = latestWeather.temperature >= animal.minTemperature && latestWeather.temperature <= animal.maxTemperature;
+    const fitsHumidity = latestWeather.humidity >= animal.minHumidity && latestWeather.humidity <= animal.maxHumidity;
+    const fitsRain = animal.rain === latestWeather.rain;
+    const fitsLuminosity = latestWeather.luminosity ? animal.sunny : animal.cloudy;
+
+    return fitsTemperature && fitsHumidity && fitsRain && fitsLuminosity;
+  };
+
   return (
     <div className="cards-container">
       {animals.map((animal) => {
         const imageUrl = animalImages[animal.id];
+        const fitsWeather = doesAnimalFitWeather(animal);
         return (
           <div
             key={animal.id}
@@ -32,6 +43,7 @@ const AnimalCards = ({ animals, isEditing, onAddAnimalClick, onDeleteClick, onEd
               backgroundPosition: 'center'
             }}
           >
+            {!fitsWeather && <div className="does">X</div>}
             <div className="card-overlay">
               <div className="card-name">{animal.name}</div>
               <div className="card-stats">
