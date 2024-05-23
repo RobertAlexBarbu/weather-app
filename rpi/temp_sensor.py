@@ -69,7 +69,7 @@ while True:
       "humidity": humidity,
       "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
       "luminosity": luminosityMessage,
-      "rain": 0
+      "rain": rain
     }
     print(data)
     db.child("Status").push(data)
