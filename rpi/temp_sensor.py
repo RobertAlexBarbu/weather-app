@@ -23,12 +23,23 @@ conv = 100 / (65535)
 dhtDevice = adafruit_dht.DHT11(board.D23)
 resistorPin = 7
 rainPin = 18
+POWER_PIN = 12  # GPIO pin that provides power to the rain sensor
+DO_PIN = 8 
 rainDevice = InputDevice(rainPin)
 rain = False
 
 
 while True:
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(8, GPIO.IN)
+  state = GPIO.input(8)
 
+  if (state == 0):
+    print("Water detected!")
+    rain = True
+  else:
+    print("Water not detected")
+    rain = False
   # Photoresistor/Luminosity Part
   GPIO.setup(resistorPin, GPIO.OUT)
   GPIO.output(resistorPin, GPIO.LOW)
@@ -46,16 +57,6 @@ while True:
   else:
     luminosityMessage = "sunny"
 
-  print(rainDevice)
- 
-
-  # Rain Detection Part
-  if(not rainDevice.is_active):
-    print("there is rain")
-    rain = True
-  else:
-    print("there is no rin")
-    rain = False
 
   # Temperature/Humidity Part
   try:
@@ -68,7 +69,7 @@ while True:
       "humidity": humidity,
       "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
       "luminosity": luminosityMessage,
-      "rain": 0
+      "rain": rain
     }
     print(data)
     db.child("Status").push(data)

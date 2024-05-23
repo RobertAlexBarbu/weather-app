@@ -31,6 +31,12 @@ while True:
     # sunny
     luminosityMessage = "sunny"
 
+  rain = False
+  d = random.randint(10, 30)
+  if(d % 2 == 0):
+    rain = True
+  else:
+    rain = False
   # Temperature/Humidity Part
   try:
     # Print the values to the serial port
