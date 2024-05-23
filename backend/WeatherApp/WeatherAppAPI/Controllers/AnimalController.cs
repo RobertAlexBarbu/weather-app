@@ -126,4 +126,19 @@ public class AnimalController : ControllerBase
         };
         return Ok(animalDto);
     }
+    
+
+    [HttpPost]
+    public async Task<ActionResult<IList<AnimalDTO>>> SendNotificationAsync(NotificationDTO notificationDto)
+    {
+        var parameters = new Dictionary<string, string> {
+            ["token"] = "a4k27kfkaj61s1vkdkxwftaqgtd4zv",
+            ["user"] = "ujx42kkfrknyo5jjf3bzk8tjrz3qcs",
+            ["message"] = notificationDto.message
+        };
+        using var client = new HttpClient();
+        var response = await client.PostAsync("https://api.pushover.net/1/messages.json", new
+            FormUrlEncodedContent(parameters));
+        return Ok();
+    }
 } 
