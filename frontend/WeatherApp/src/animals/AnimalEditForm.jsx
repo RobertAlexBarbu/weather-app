@@ -1,8 +1,10 @@
+// AnimalEditForm.jsx
 import React, { useState } from 'react';
 import './AnimalForm.css';
 
-const AnimalEditForm = ({ animal, onEditAnimal, onClose }) => {
+const AnimalEditForm = ({ animal, onEditAnimal, onClose, uploadImage }) => {
   const [animalData, setAnimalData] = useState({ ...animal });
+  const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -12,11 +14,23 @@ const AnimalEditForm = ({ animal, onEditAnimal, onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onEditAnimal(animalData);
-    onClose(); // Close the form after submission
+  const handleImageChange = (e) => {
+    setImageFile(e.target.files[0]);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (imageFile) {
+        const imageUrl = await uploadImage(imageFile, animalData.name);
+        setAnimalData((prevData) => ({
+            ...prevData,
+            imageUrl,
+        }));
+        console.log('Image URL set in animal data:', imageUrl);
+    }
+    onEditAnimal(animalData);
+    onClose();
+};
 
   return (
     <div className="modal-overlay">
@@ -27,6 +41,15 @@ const AnimalEditForm = ({ animal, onEditAnimal, onClose }) => {
         </div>
         <div className="modal-body">
           <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="image">Image</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                onChange={handleImageChange}
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input

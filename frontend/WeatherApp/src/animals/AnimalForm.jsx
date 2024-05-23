@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './AnimalForm.css';
 
-const AnimalForm = ({ onCreateAnimal, onClose }) => {
+const AnimalForm = ({ onCreateAnimal, onClose, uploadImage }) => {
   const [animalData, setAnimalData] = useState({
     name: '',
     minTemperature: '',
@@ -12,7 +12,10 @@ const AnimalForm = ({ onCreateAnimal, onClose }) => {
     rain: false,
     sunny: false,
     cloudy: false,
+    imageUrl: ''
   });
+
+  const [imageFile, setImageFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -22,11 +25,23 @@ const AnimalForm = ({ onCreateAnimal, onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onCreateAnimal(animalData);
-    onClose(); // Close the form after submission
+  const handleImageChange = (e) => {
+    setImageFile(e.target.files[0]);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (imageFile) {
+        const imageUrl = await uploadImage(imageFile, animalData.name);
+        setAnimalData((prevData) => ({
+            ...prevData,
+            imageUrl,
+        }));
+        console.log('Image URL set in animal data:', imageUrl);
+    }
+    onCreateAnimal(animalData);
+    onClose();
+};
 
   return (
     <div className="modal-overlay">
@@ -37,6 +52,16 @@ const AnimalForm = ({ onCreateAnimal, onClose }) => {
         </div>
         <div className="modal-body">
           <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="image">Image</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                onChange={handleImageChange}
+                required
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input

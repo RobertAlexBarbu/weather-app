@@ -1,7 +1,9 @@
+// App.jsx
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, off } from 'firebase/database';
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import Particle from './components/Particle';
 import BackgroundVideo from './components/BackgroundVideo';
 import { getAllAnimals, createAnimal, deleteAnimal, editAnimal } from './animals/api';
@@ -9,7 +11,6 @@ import AnimalCards from './animals/Animals';
 import AnimalForm from './animals/AnimalForm';
 import ConfirmationModal from './animals/ConfirmationModal';
 import AnimalEditForm from './animals/AnimalEditForm';
-
 
 function App() {
   const [latestWeather, setLatestWeather] = useState(null);
@@ -37,10 +38,8 @@ function App() {
     const weatherRef = ref(db, 'Status');
     onValue(weatherRef, (snapshot) => {
       const data = snapshot.val();
-      console.log('Fetched data:', data);
       if (data) {
         const latestData = Object.values(data).pop();
-        console.log('Latest data:', latestData);
         setLatestWeather(latestData);
       }
     });
@@ -62,6 +61,29 @@ function App() {
 
     fetchAnimals();
   }, []);
+
+  const uploadImage = async (file, animalName) => {
+    const storage = getStorage(app);
+    const storageReference = storageRef(storage, `animal_images/${animalName}`);
+    await uploadBytes(storageReference, file);
+    const url = await getDownloadURL(storageReference);
+    console.log(`Image uploaded successfully: ${url}`);
+    return url;
+  };
+
+
+  const downloadImageUrl = async (animalName) => {
+    const storage = getStorage(app);
+    const storageReference = storageRef(storage, `animal_images/${animalName}`);
+    try {
+      const url = await getDownloadURL(storageReference);
+      console.log(`Image URL downloaded successfully: ${url}`);
+      return url;
+    } catch (error) {
+      console.error(`Failed to download image URL for ${animalName}`, error);
+      return null;
+    }
+  };
 
   const handleCreateAnimal = async (animalData) => {
     try {
@@ -90,10 +112,15 @@ function App() {
     try {
       const animalToDeleteName = animalToDelete.name;
       await deleteAnimal(animalToDelete.id);
+      // Delete image from Firebase Storage
+      const storage = getStorage(app);
+      const storageReference = storageRef(storage, `animal_images/${animalToDeleteName}`);
+      await deleteObject(storageReference);
+
       setAnimals(animals.filter((a) => a.id !== animalToDelete.id));
       setShowModal(false);
       setAnimalToDelete(null);
-      console.log('\"' + animalToDeleteName  + '\" ' + 'has been deleted');
+      console.log('"' + animalToDeleteName + '" ' + 'has been deleted');
     } catch (error) {
       console.error('Failed to delete animal', error);
     }
@@ -117,11 +144,10 @@ function App() {
     setAnimalToEdit(null);
   };
 
-
   return (
     <>
       <Particle />
-      <BackgroundVideo luminosity={latestWeather && latestWeather.luminosity} isRaining={latestWeather && latestWeather.rain}/>
+      <BackgroundVideo luminosity={latestWeather && latestWeather.luminosity} isRaining={latestWeather && latestWeather.rain} />
       <h1>Weather Data</h1>
       <table className="weather-table">
         <thead>
@@ -153,16 +179,17 @@ function App() {
         {isEditing ? 'Cancel' : 'Edit'}
       </button>
       {showForm && (
-        <AnimalForm onCreateAnimal={handleCreateAnimal} onClose={() => setShowForm(false)} />
+        <AnimalForm onCreateAnimal={handleCreateAnimal} onClose={() => setShowForm(false)} uploadImage={uploadImage} />
       )}
       {animalToEdit && (
         <AnimalEditForm
           animal={animalToEdit}
           onEditAnimal={handleEditAnimal}
           onClose={handleCloseEditForm}
+          uploadImage={uploadImage}
         />
       )}
-      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} onDeleteClick={handleDeleteClick} onEditButtonClick={handleEditButtonClick}/>
+      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} onDeleteClick={handleDeleteClick} onEditButtonClick={handleEditButtonClick} downloadImageUrl={downloadImageUrl} />
       <ConfirmationModal
         show={showModal}
         onClose={() => setShowModal(false)}
