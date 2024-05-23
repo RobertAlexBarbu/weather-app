@@ -1,3 +1,4 @@
+/* AnimalForm.css */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -10,7 +11,7 @@
   align-items: center;
   z-index: 1000;
 }
-  
+
 .modal-content {
   background-color: #251f1f;
   padding: 1rem 2.5rem;
@@ -22,7 +23,7 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-  
+
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -33,13 +34,13 @@
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }
-  
+
 .modal-header h2 {
   margin: 0;
   font-size: 1.5rem;
   color: black;
 }
-  
+
 .close-button {
   background: none;
   border: none;
@@ -48,11 +49,11 @@
   color: #aaa;
   transition: color 0.3s;
 }
-  
+
 .close-button:hover {
   color: #333;
 }
-  
+
 .modal-body {
   padding: 1rem 0;
   border-bottom-left-radius: 16px;
@@ -66,15 +67,13 @@
 }
 
 .modal-body input {
-  background-color:rgb(185, 176, 176);
+  background-color: rgb(185, 176, 176);
 }
-  
+
 .form-group {
   margin-bottom: 1rem;
 }
-  
 
-  
 .form-group input {
   width: 100%;
   padding: 0.75rem;
@@ -83,34 +82,35 @@
   border-radius: 4px;
   transition: border-color 0.3s;
 }
-  
+
 .form-group input:focus {
   border-color: #4CAF50;
   outline: none;
 }
-  
+
 .checkbox-group {
   display: flex;
   align-items: center;
 }
+
 .checkbox-group input[type="checkbox"] {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   margin-right: 8px; /* Optional: Add some space between the checkbox and label */
 }
+
 .checkbox-group label {
   display: block; /* Ensure label takes up full width */
   text-align: center; /* Center-align label text */
 }
 
-  
 .form-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-  
+
 .form-buttons button {
   flex: 1;
   margin-right: 0.5rem;
@@ -122,48 +122,47 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-  
+
 .submit-button {
   background-color: #4CAF50;
 }
-  
+
 .submit-button:hover {
   background-color: #45a049;
 }
-  
+
 .cancel-button {
   background-color: #f44336;
 }
-  
+
 .cancel-button:hover {
   background-color: #e53935;
 }
-  
+
 @media (max-width: 600px) {
   .modal-content {
     padding: 0.5rem;
   }
-  
+
   .modal-header h2 {
     font-size: 1.25rem;
   }
-  
+
   .form-group label {
     font-size: 0.875rem;
   }
-  
+
   .form-group input[type="number"]::-webkit-outer-spin-button,
   .form-group input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-  
+
   .form-buttons {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .form-buttons button {
     margin: 0;
   }
 }
-  

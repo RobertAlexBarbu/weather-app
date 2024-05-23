@@ -14,11 +14,14 @@
   overflow: hidden;
 }
 
+
+
 .card-name,
 .card-stats {
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  color: #333;
+  font-size: 1.4rem;
+  color: #007BFF;
 }
 
 .card:hover .card-name {
@@ -35,9 +38,9 @@
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  color: #333;
+  color: #20C997;
   z-index: 1;
   transform: translateY(-20px);
 }
@@ -48,6 +51,7 @@
   right: 0.5rem;
   text-align: right;
   transform: translateX(20px);
+  font-weight: bold;
 }
 
 .stat {
@@ -124,7 +128,6 @@
 .delete-button:hover {
   color: darkred;
 }
-
 
 .edit-animal-button {
   position: absolute;
