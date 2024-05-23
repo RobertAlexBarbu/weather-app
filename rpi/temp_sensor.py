@@ -36,8 +36,10 @@ while True:
 
   if (state == 0):
     print("Water detected!")
+    rain = True
   else:
     print("Water not detected")
+    rain = False
   # Photoresistor/Luminosity Part
   GPIO.setup(resistorPin, GPIO.OUT)
   GPIO.output(resistorPin, GPIO.LOW)
@@ -55,16 +57,6 @@ while True:
   else:
     luminosityMessage = "sunny"
 
-  print(rainDevice)
- 
-
-  # Rain Detection Part
-  if(not rainDevice.is_active):
-    print("there is rain")
-    rain = True
-  else:
-    print("there is no rin")
-    rain = False
 
   # Temperature/Humidity Part
   try:
