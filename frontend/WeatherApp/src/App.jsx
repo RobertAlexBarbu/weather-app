@@ -4,10 +4,11 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, off } from 'firebase/database';
 import Particle from './components/Particle';
 import BackgroundVideo from './components/BackgroundVideo';
-import { getAllAnimals, createAnimal, deleteAnimal } from './animals/api';
+import { getAllAnimals, createAnimal, deleteAnimal, editAnimal } from './animals/api';
 import AnimalCards from './animals/Animals';
 import AnimalForm from './animals/AnimalForm';
 import ConfirmationModal from './animals/ConfirmationModal';
+import AnimalEditForm from './animals/AnimalEditForm';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [animalToDelete, setAnimalToDelete] = useState(null);
+  const [animalToEdit, setAnimalToEdit] = useState(null);
 
   const firebaseConfig = {
     apiKey: 'AIzaSyBme5hGShcyPNOfRCl0HgSNJU5MmOfbg8Q',
@@ -97,11 +99,29 @@ function App() {
     }
   };
 
+  const handleEditAnimal = async (animalData) => {
+    try {
+      const updatedAnimal = await editAnimal(animalData);
+      setAnimals(animals.map((animal) => (animal.id === updatedAnimal.id ? updatedAnimal : animal)));
+      setAnimalToEdit(null);
+    } catch (error) {
+      console.error('Failed to update animal', error);
+    }
+  };
+
+  const handleEditButtonClick = (animal) => {
+    setAnimalToEdit(animal);
+  };
+
+  const handleCloseEditForm = () => {
+    setAnimalToEdit(null);
+  };
+
 
   return (
     <>
       <Particle />
-      <BackgroundVideo isRaining={latestWeather && latestWeather.rain} />
+      <BackgroundVideo luminosity={latestWeather && latestWeather.luminosity} isRaining={latestWeather && latestWeather.rain}/>
       <h1>Weather Data</h1>
       <table className="weather-table">
         <thead>
@@ -135,7 +155,14 @@ function App() {
       {showForm && (
         <AnimalForm onCreateAnimal={handleCreateAnimal} onClose={() => setShowForm(false)} />
       )}
-      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} onDeleteClick={handleDeleteClick} />
+      {animalToEdit && (
+        <AnimalEditForm
+          animal={animalToEdit}
+          onEditAnimal={handleEditAnimal}
+          onClose={handleCloseEditForm}
+        />
+      )}
+      <AnimalCards animals={animals} isEditing={isEditing} onAddAnimalClick={handleAddAnimalClick} onDeleteClick={handleDeleteClick} onEditButtonClick={handleEditButtonClick}/>
       <ConfirmationModal
         show={showModal}
         onClose={() => setShowModal(false)}

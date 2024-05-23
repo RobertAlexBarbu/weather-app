@@ -124,3 +124,21 @@
 .delete-button:hover {
   color: darkred;
 }
+
+
+.edit-animal-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-animal-button:hover {
+  background-color: darkblue;
+}
