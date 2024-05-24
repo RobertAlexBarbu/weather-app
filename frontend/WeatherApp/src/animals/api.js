@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://localhost:7114/api/animal';
+const API_BASE_URL = 'https://weather-station123.azurewebsites.net/api/animal';
 
 export const getAllAnimals = async () => {
   try {

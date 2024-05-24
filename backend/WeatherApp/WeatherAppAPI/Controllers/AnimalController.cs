@@ -127,7 +127,9 @@ public class AnimalController : ControllerBase
         return Ok(animalDto);
     }
     
-
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpPost]
     public async Task<ActionResult<IList<AnimalDTO>>> SendNotificationAsync(NotificationDTO notificationDto)
     {
